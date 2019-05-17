@@ -1,5 +1,5 @@
 var john = {
-  bills: [124, 48, 268, 180, 42],
+  bills: [128, 50, 268, 180, 42],
   finalAmount: [],
   tips: [],
   calc: function(x = this.bills) {
@@ -21,6 +21,51 @@ var john = {
   }
 };
 
+
+
+var mark = {
+  bills: [124, 48, 270, 180, 50],
+  finalAmount: [],
+  tips: [],
+  calc: function(x = this.bills) {
+    var start,
+      y = this.tips,
+      z = this.finalAmount;
+    for (start = 0; start < x.length; start++) {
+      if (x[start] < 100) {
+        y.push(0.2 * x[start]);
+        z.push(x[start] + 0.2 * x[start]);
+      } else if (x[start] > 100 && x[start] < 300) {
+        y.push(0.1 * x[start]);
+        z.push(x[start] + 0.15 * x[start]);
+      } else {
+        y.push(0.1 * x[start]);
+        z.push(x[start] + 0.25 * x[start]);
+      }
+    }
+  },
+  avg: function(x = this.tips) {
+    var start, sum = 0,
+      average;
+    for (start = 0; start < x.length; start++) {
+      sum += x[start];
+    }
+    avg = sum / x.length;
+    return avg;
+  }
+};
+
 john.calc();
-console.log("The tips are " + john.tips);
-console.log("The finalAmount is " + john.finalAmount);
+console.log("john tips are " + john.tips);
+console.log("john finalAmount is " + john.finalAmount);
+console.log("john average tip is " + mark.avg(john.tips));
+mark.calc();
+console.log("mark tips are " + mark.tips);
+console.log("mark finalAmount is " + mark.finalAmount);
+console.log("mark average tip is " + mark.avg());
+
+if (mark.avg(john.tips) > mark.avg())
+  console.log("john has paid highest avg tip");
+else {
+  console.log("mark has paid highest avg tip");
+}
